@@ -8,13 +8,42 @@ generator client {
 datasource db {
     provider = "postgresql"
     url      = env("DATABASE_URL")
+    relationMode = "prisma"
 }
 
-model Post {
+model TreeKind {
     id        Int      @id @default(autoincrement())
     name      String
+    trees Tree[]
+}
+
+model Forest {
+    id        Int      @id @default(autoincrement())
+    name      String
+    trees Tree[]
+}
+
+model Count {
+    id        Int      @id @default(autoincrement())
+    trees Tree[]
+}
+
+model Tree {
+    id        Int      @id @default(autoincrement())
+    treeKindId  Int
+    treeKind  TreeKind @relation(fields: [treeKindId], references: [id])
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+    countId Int
+    count Count @relation(fields: [countId], references: [id])
+    forestId Int
+    forest  Forest @relation(fields: [forestId], references: [id])
+    age   Int
+    notes String
+    isIllegalFelling  Boolean
+    isViewed Boolean
+    viewedAt DateTime
 
-    @@index([name])
+
+//    @@index([treeKindId, forestId, countId, isIllegalFelling ])
 }
