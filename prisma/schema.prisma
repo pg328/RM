@@ -23,7 +23,7 @@ model Forest {
     trees Tree[]
 }
 
-model Count {
+model Batch {
     id        Int      @id @default(autoincrement())
     trees Tree[]
 }
@@ -34,16 +34,15 @@ model Tree {
     treeKind  TreeKind @relation(fields: [treeKindId], references: [id])
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
-    countId Int
-    count Count @relation(fields: [countId], references: [id])
+    batchId Int
+    batch Batch @relation(fields: [batchId], references: [id])
     forestId Int
     forest  Forest @relation(fields: [forestId], references: [id])
     age   Int
-    notes String
-    isIllegalFelling  Boolean
-    isViewed Boolean
-    viewedAt DateTime
+    notes String @default("")
+    isIllegalFelling  Boolean @default(false)
+    isViewed Boolean @default(false)
+    viewedAt DateTime?
 
-
-//    @@index([treeKindId, forestId, countId, isIllegalFelling ])
+//    @@index([treeKindId, forestId, batchId, isIllegalFelling ])
 }
