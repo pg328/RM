@@ -25,6 +25,16 @@ export const treeRouter = createTRPCRouter({
     )
     .query(({ ctx, input }) => {
       return ctx.db.tree.findMany({
+        select: {
+          id: true,
+          treeKind: true,
+          forest: true,
+          batch: true,
+          age: true,
+          createdAt: true,
+          isIllegalFelling: true,
+          notes: true,
+        },
         take: input.take,
         skip: input.skip,
         orderBy: { createdAt: "desc" },

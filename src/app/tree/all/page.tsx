@@ -6,6 +6,10 @@ import { api } from "~/trpc/react";
 
 const formatter = new Intl.DateTimeFormat("en-GB");
 
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
+
 export default function External() {
   const router = useRouter();
 
@@ -56,25 +60,31 @@ export default function External() {
                       scope="col"
                       className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
                     >
-                      Name
+                      Tree Age
+                    </th>
+                    <th
+                      scope="col"
+                      className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
+                    >
+                      Tree Species
                     </th>
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
-                      Title
+                      Count Number
                     </th>
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
-                      Email
+                      Forest
                     </th>
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
-                      Role
+                      Date of Recording
                     </th>
                     <th
                       scope="col"
@@ -99,11 +109,14 @@ export default function External() {
                         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
                           {tree.age}
                         </td>
-                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                          {tree.id}
+                        <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
+                          {tree.treeKind.name}
                         </td>
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                          {tree.age}
+                          {tree.batch.id}
+                        </td>
+                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                          {tree.forest.name}
                         </td>
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                           {treeDate}
@@ -128,9 +141,9 @@ export default function External() {
               >
                 <div className="hidden sm:block">
                   <p className="text-sm text-gray-700">
-                    Showing <span className="font-medium">{from}</span> to{" "}
+                    Showing <span className="font-medium">{from + 1}</span> to{" "}
                     <span className="font-medium">
-                      {to > TreeCount.data! ? TreeCount.data : to}
+                      {to > TreeCount.data! ? TreeCount.data : to + 1}
                     </span>{" "}
                     of <span className="font-medium">{TreeCount?.data}</span>{" "}
                     results
@@ -140,14 +153,16 @@ export default function External() {
                   <button
                     disabled={from === 0}
                     onClick={() => setPage((page) => page - 1)}
-                    className="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0"
+                    className={classNames(
+                      "relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0 disabled:bg-gray-700",
+                    )}
                   >
                     Previous
                   </button>
                   <button
                     disabled={to > TreeCount.data!}
                     onClick={() => setPage((page) => page + 1)}
-                    className="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0"
+                    className="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0 disabled:bg-gray-700"
                   >
                     Next
                   </button>
