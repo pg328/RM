@@ -20,7 +20,7 @@ export const treeSchema = z.object({
   treeKindId: z.coerce.number().min(1, {
     message: "You must specify a tree species!",
   }),
-  countId: z.coerce.number().min(1, {
+  batchId: z.coerce.number().min(1, {
     message: "You must specify a batch number!",
   }),
   forestId: z.coerce.number().min(1, {

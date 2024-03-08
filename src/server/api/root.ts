@@ -1,5 +1,5 @@
 import { treeRouter } from "~/server/api/routers/tree";
-import { treeTypeRouter } from "~/server/api/routers/treeType";
+import { treeKindRouter } from "~/server/api/routers/treeKind";
 import { createTRPCRouter } from "~/server/api/trpc";
 import { forestRouter } from "./routers/forest";
 import { batchRouter } from "./routers/batch";
@@ -11,7 +11,7 @@ import { batchRouter } from "./routers/batch";
  */
 export const appRouter = createTRPCRouter({
   tree: treeRouter,
-  treeType: treeTypeRouter,
+  treeKind: treeKindRouter,
   forest: forestRouter,
   batch: batchRouter,
 });

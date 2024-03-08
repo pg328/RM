@@ -8,7 +8,7 @@ export const treeRouter = createTRPCRouter({
     return ctx.db.tree.create({
       data: {
         treeKindId: input.treeKindId,
-        countId: input.countId,
+        batchId: input.batchId,
         forestId: input.forestId,
         age: input.age,
         notes: input.notes ?? "",
@@ -36,15 +36,6 @@ export const treeRouter = createTRPCRouter({
       orderBy: { createdAt: "desc" },
     });
   }),
-  // getLast3TreeTypes: publicProcedure.query(({ ctx }) => {
-  //   return ctx.db.tree.findMany({
-  //     take: 3,
-  //     orderBy: { createdAt: "desc" },
-  //     include: {
-  //       treeKind: true,
-  //     },
-  //   });
-  // }),
   getLatest: publicProcedure.query(({ ctx }) => {
     return ctx.db.tree.findFirst({
       orderBy: { createdAt: "desc" },

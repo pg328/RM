@@ -5,15 +5,15 @@ import { useState } from "react";
 
 import { api } from "~/trpc/react";
 
-export default function CreateForest() {
+export default function CreateTreeKind() {
   const router = useRouter();
-  const [forest, setForest] = useState("");
+  const [kind, setKind] = useState("");
   const [errors, setErrors] = useState({});
 
-  const createForest = api.forest.create.useMutation({
+  const createTreeKind = api.treeKind.create.useMutation({
     onSuccess: () => {
       router.refresh();
-      setForest("");
+      setKind("");
     },
   });
 
@@ -21,7 +21,7 @@ export default function CreateForest() {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        createForest.mutate({ name: forest });
+        createTreeKind.mutate({ name: kind });
       }}
       onError={(e) => {
         e.preventDefault();
@@ -32,16 +32,16 @@ export default function CreateForest() {
       <input
         type="text"
         placeholder="New Tree"
-        value={forest}
-        onChange={(e) => setForest(e.target.value)}
+        value={kind}
+        onChange={(e) => setKind(e.target.value)}
         className="w-full rounded-full px-4 py-2 text-black"
       />
       <button
         type="submit"
         className="rounded-full bg-white/10 px-10 py-3 font-semibold transition hover:bg-white/20"
-        disabled={createForest.isLoading}
+        disabled={createTreeKind.isLoading}
       >
-        {createForest.isLoading ? "Submitting..." : "Submit"}
+        {createTreeKind.isLoading ? "Submitting..." : "Submit"}
       </button>
     </form>
   );
