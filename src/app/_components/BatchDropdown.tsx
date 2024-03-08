@@ -11,7 +11,6 @@ type BatchDropdownProps = {
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
-
 export const BatchDropdown: React.FC<BatchDropdownProps> = ({
   update,
   batches,

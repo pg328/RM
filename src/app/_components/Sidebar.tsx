@@ -8,6 +8,7 @@ import {
   XMarkIcon,
   Bars3Icon,
 } from "@heroicons/react/24/outline";
+import { usePathname } from "next/navigation";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -16,6 +17,7 @@ function classNames(...classes) {
 export const Sidebar = ({ children }: { children: React.ReactNode }) => {
   const [sidebarState, setSidebarState] = useState(false);
 
+  const pathname = usePathname();
   const navigation: {
     name: string;
     href: string;
@@ -26,25 +28,25 @@ export const Sidebar = ({ children }: { children: React.ReactNode }) => {
       name: "New Tree",
       href: "/tree/new",
       icon: HomeIcon,
-      current: window.location.pathname === "/tree/new",
+      current: pathname === "/tree/new",
     },
     {
       name: "New Forest",
       href: "/forest/new",
       icon: PlusIcon,
-      current: window.location.pathname === "/forest/new",
+      current: pathname === "/forest/new",
     },
     {
       name: "New Species",
       href: "/kind/new",
       icon: PlusIcon,
-      current: window.location.pathname === "/kind/new",
+      current: pathname === "/kind/new",
     },
     {
       name: "New Count",
       href: "/batch/new",
       icon: PlusIcon,
-      current: window.location.pathname === "/batch/new",
+      current: pathname === "/batch/new",
     },
     {
       name: "All Trees",

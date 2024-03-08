@@ -51,7 +51,7 @@ export const CreateTree: React.FC<CreateTreeProps> = ({
     isIllegalFelling: false,
   };
 
-  const [errors, setErrors] = useState({ age: "" });
+  const [errors, setErrors] = useState<any>({ age: "" });
   const treeReducer = (state: TreeKind, action: ActionType) => {
     if (action.type === "UPDATE_TREE") {
       return { ...state, ...action.payload };

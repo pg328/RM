@@ -19,7 +19,7 @@ export default function CreateBatch() {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        createBatch.mutate({});
+        createBatch.mutate();
       }}
       onError={(e) => {
         e.preventDefault();
