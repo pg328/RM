@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { AgeInput } from "~/app/_components/AgeInput";
 
 import { api } from "~/trpc/react";
 
@@ -31,7 +32,7 @@ export default function CreateForest() {
     >
       <input
         type="text"
-        placeholder="New Tree"
+        placeholder="New Forest"
         value={forest}
         onChange={(e) => setForest(e.target.value)}
         className="w-full rounded-full px-4 py-2 text-black"

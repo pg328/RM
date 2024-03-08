@@ -31,7 +31,7 @@ export default function CreateTreeKind() {
     >
       <input
         type="text"
-        placeholder="New Tree"
+        placeholder="New Tree Species"
         value={kind}
         onChange={(e) => setKind(e.target.value)}
         className="w-full rounded-full px-4 py-2 text-black"

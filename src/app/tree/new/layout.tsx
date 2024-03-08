@@ -1,4 +1,4 @@
-import Card from "~/app/_components/Card";
+import { api } from "~/trpc/server";
 
 export default async function CrudShowcase({
   children,
@@ -7,7 +7,9 @@ export default async function CrudShowcase({
 }) {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <Card heading="New Tree Species">{children}</Card>
+      <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
+        {children}
+      </div>
     </main>
   );
 }

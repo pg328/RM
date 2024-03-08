@@ -1,3 +1,5 @@
+import { Switch } from "@headlessui/react";
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { unstable_noStore as noStore } from "next/cache";
 import Link from "next/link";
 
@@ -18,7 +20,7 @@ async function CrudShowcase() {
   const batches = await api.batch.getBatches.query();
 
   return (
-    <div className="w-full">
+    <div>
       <CreateTree treeKinds={treeKinds} forests={forests} batches={batches} />
     </div>
   );
