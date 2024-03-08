@@ -19,17 +19,22 @@ export const treeRouter = createTRPCRouter({
   getTrees: publicProcedure
     .input(
       z.object({
-        page: z.number(),
-        itemsPerPage: z.number(),
+        take: z.number(),
+        skip: z.number(),
       }),
     )
     .query(({ ctx, input }) => {
       return ctx.db.tree.findMany({
-        take: input.itemsPerPage,
-        skip: input.page * input.itemsPerPage,
+        take: input.take,
+        skip: input.skip,
         orderBy: { createdAt: "desc" },
       });
     }),
+  getTreeCount: publicProcedure.query(({ ctx }) => {
+    return ctx.db.tree.count({
+      orderBy: { createdAt: "desc" },
+    });
+  }),
   getLastN: publicProcedure.input(z.number()).query(({ ctx, input }) => {
     return ctx.db.tree.findMany({
       take: input,
