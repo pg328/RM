@@ -11,12 +11,12 @@ export default function External() {
 
   const [page, setPage] = useState(0);
   const [itemsPerPage] = useState(5);
-  const from = page * itemsPerPage + 1;
-  const to = (page + 1) * itemsPerPage;
+  const from = page * itemsPerPage;
+  const to = from + itemsPerPage;
 
   const TreeData = api.tree.getTrees.useQuery({
-    skip: from - 1,
-    take: to - from,
+    skip: from,
+    take: itemsPerPage,
   });
   const TreeCount = api.tree.getTreeCount.useQuery();
 
@@ -95,7 +95,7 @@ export default function External() {
                     const treeCreationDate = new Date(tree.createdAt);
                     const treeDate = formatter.format(treeCreationDate);
                     return (
-                      <tr key={tree.age}>
+                      <tr key={tree.id}>
                         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
                           {tree.age}
                         </td>
@@ -138,14 +138,14 @@ export default function External() {
                 </div>
                 <div className="flex flex-1 justify-between sm:justify-end">
                   <button
-                    disabled={from - itemsPerPage <= 0}
+                    disabled={from === 0}
                     onClick={() => setPage((page) => page - 1)}
                     className="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0"
                   >
                     Previous
                   </button>
                   <button
-                    disabled={to + itemsPerPage > TreeCount.data!}
+                    disabled={to > TreeCount.data!}
                     onClick={() => setPage((page) => page + 1)}
                     className="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0"
                   >
